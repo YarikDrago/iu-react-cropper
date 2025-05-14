@@ -54,6 +54,12 @@ export const CropperBlock: React.FC = () => {
         }
     }
 
+    const handleRotate = (ccw?: true) => {
+        if (cropperRef.current === null) return;
+        const cropper = cropperRef.current.cropper;
+        cropper.rotate(ccw ? -90 : 90); // Поворот на 90 градусов
+    };
+
     return (
         <div>
             <div style={{width: "100%"}}>
@@ -77,6 +83,34 @@ export const CropperBlock: React.FC = () => {
                     checkOrientation={false}
                     guides={true}
                   />
+                  <div
+                    style={{
+                        display: "flex",
+                        gap: "10px",
+                        alignItems: "center"
+                    }}
+                  >
+                    <p>Rotate image:</p>
+                    <div
+                      style={{
+                          display: "flex",
+                          gap: "5px",
+                      }}
+                    >
+                      <button
+                        onClick={() => {
+                            handleRotate()
+                        }}
+                      >CW
+                      </button>
+                      <button
+                        onClick={() => {
+                            handleRotate(true)
+                        }}
+                      >CCW
+                      </button>
+                    </div>
+                  </div>
                 </>}
             </div>
             {image && <div>
